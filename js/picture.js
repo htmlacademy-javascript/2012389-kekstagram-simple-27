@@ -1,15 +1,16 @@
 //Отобразить фотографии других пользователей.
 
-import {getPhotoDescription} from './data.js';
 
+import {photoDescription} from './data.js';
 
 const pictureTemplate = document
   .querySelector('#picture')
   .content.querySelector('.picture');
 const container = document.querySelector('.pictures');
 
-const photoDescription = getPhotoDescription();
+
 const pictureFragment = document.createDocumentFragment();
+
 
 photoDescription.forEach(({url, likes, comments, description }) => {
   const picture = pictureTemplate.cloneNode(true);
