@@ -23,5 +23,7 @@ const getPhotoDescription = (_, index) => ({
 
 const photoDescription = Array.from({length: PHOTO_DESCRIPTION_COUNT}, getPhotoDescription);
 
-photoDescription();
+// photoDescription();
 
+export {getPhotoDescription};
+export {photoDescription};
