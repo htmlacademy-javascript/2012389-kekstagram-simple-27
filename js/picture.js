@@ -1,6 +1,5 @@
 //Отобразить фотографии других пользователей.
 
-
 import {photoDescription} from './data.js';
 
 const pictureTemplate = document
