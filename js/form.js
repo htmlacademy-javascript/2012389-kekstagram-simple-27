@@ -15,7 +15,7 @@ const pristine = new Pristine(form, {
 const showModal = () => {
   modal.classList.remove('hidden');
   body.classList.add('modal-open');
-  // document.addEventListener('keydown', onEscKeyDown);
+  document.addEventListener('keydown', onEscKeyDown);
 };
 
 const hideModal = () => {
@@ -32,7 +32,7 @@ const isTextFieldFocused = () =>
 
 function onEscKeyDown(evt) {
   if (evt.key === 'Escape' && !isTextFieldFocused()) {
-    evt.peventDefault();
+    evt.preventDefault();
     hideModal();
   }
 }
