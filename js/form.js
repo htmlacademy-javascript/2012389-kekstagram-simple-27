@@ -12,12 +12,6 @@ const pristine = new Pristine(form, {
   errorTextClass: 'img-upload__message--loading',
 });
 
-function validateCommentField (value) {
-  return value.length >= 20 && value.length <= 140;
-}
-
-pristine.addValidator(commentField, validateCommentField);
-
 const showModal = () => {
   modal.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -50,10 +44,15 @@ const onFileInputChange = () => {
   showModal();
 };
 
+
 form.addEventListener('submit', (evt) => {
+  // console.log('submit');
   evt.preventDefault();
-  pristine.validate();
+  if(pristine.validate()){
+    form.submit();
+  }
 });
 
 uploadFile.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
+
