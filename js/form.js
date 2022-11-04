@@ -7,10 +7,16 @@ const commentField = document.querySelector('.text__description');
 
 
 const pristine = new Pristine(form, {
-  classTo: 'img-upload__wrapper',
-  errorTextParent: 'img-upload__wrapper',
-  errorTextClass: 'img-upload__wrapper__error',
+  classTo: 'img-upload__text',
+  errorTextParent: 'img-upload__text',
+  errorTextClass: 'img-upload__message--loading',
 });
+
+function validateCommentField (value) {
+  return value.length >= 20 && value.length <= 140;
+}
+
+pristine.addValidator(commentField, validateCommentField);
 
 const showModal = () => {
   modal.classList.remove('hidden');
@@ -25,7 +31,6 @@ const hideModal = () => {
   body.classList.remove('modal-open');
   document.addEventListener('keydown', onEscKeyDown);
 };
-
 
 const isTextFieldFocused = () =>
   document.activeElement === commentField;
@@ -45,6 +50,10 @@ const onFileInputChange = () => {
   showModal();
 };
 
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  pristine.validate();
+});
 
 uploadFile.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
