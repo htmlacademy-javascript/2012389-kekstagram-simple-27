@@ -1303,6 +1303,7 @@ main {
   * Экран загрузки изображения
   */
 
+
 .img-upload__message--loading::before {
   content: "";
   position: absolute;
