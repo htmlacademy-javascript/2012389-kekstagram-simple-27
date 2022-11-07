@@ -1,3 +1,6 @@
+import { resetScale } from './scale.js';
+import { resetEffect } from './effect.js';
+
 const form = document.querySelector('.img-upload__form');
 const modal = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
@@ -20,6 +23,8 @@ const showModal = () => {
 
 const hideModal = () => {
   form.reset();
+  resetScale();
+  resetEffect();
   pristine.reset();
   modal.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -46,7 +51,6 @@ const onFileInputChange = () => {
 
 
 form.addEventListener('submit', (evt) => {
-  // console.log('submit');
   evt.preventDefault();
   if(pristine.validate()){
     form.submit();
