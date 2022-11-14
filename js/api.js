@@ -1,4 +1,6 @@
 import { renderPictures } from './picture.js';
+import { successAlert } from './util.js';
+import { showAlert } from './util.js';
 
 
 // Получение изображений из сервера
@@ -24,13 +26,13 @@ const sendData = (onSuccess, onFail, body) => {
   )
     .then((response) => {
       if (response.ok) {
-        onSuccess();
+        onSuccess(successAlert);
       } else {
-        onFail('Не удалось отправить форму. Попробуйте ещё раз');
+        onFail(showAlert);
       }
     })
     .catch(() => {
-      onFail('Не удалось отправить форму. Попробуйте ещё раз');
+      onFail(showAlert);
     });
 };
 

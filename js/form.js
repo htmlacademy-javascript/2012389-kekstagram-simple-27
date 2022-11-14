@@ -58,26 +58,14 @@ const setUserFormSubmit = (onSuccess) => {
     const isValid = pristine.validate();
 
     if(isValid) {
-      const formData = new FormData(evt.target);
-      fetch(
-        'https://27.javascript.pages.academy/kekstagram-simple',
-        {
-          method: 'POST',
-          body: formData,
-        },
-      )
-        .then((response) => {
-          if (response.ok) {
-            onSuccess();
-          } else {
-            showAlert();
-          }
-        })
-        .catch(() => {
-          showAlert();
-        });
+      sendData(
+        () => onSuccess(),
+        () => showAlert(),
+        new FormData(evt.target),
+      );
     }
   });
+  form.submit();
 };
 
 setUserFormSubmit(hideModal);

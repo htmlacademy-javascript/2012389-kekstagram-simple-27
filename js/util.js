@@ -49,8 +49,26 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+//Соощение о успешной отправке фото
+const successTemplate = document
+  .querySelector('#success')
+  .content.querySelector('.success');
+const successContainer = document.createElement('div');
+
+const successAlert = (message) => {
+  const success = successTemplate.cloneNode(true);
+  success.querySelector('.success__title').textContent = message;
+
+  document.body.append(successContainer);
+
+  setTimeout(() => {
+    successContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+
 //Экспорт
 
 export {getRandomNumber};
 export {getRandomArrayElement};
 export {showAlert};
+export {successAlert};
