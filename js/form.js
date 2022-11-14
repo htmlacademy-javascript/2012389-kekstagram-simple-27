@@ -1,7 +1,7 @@
 import { resetScale } from './scale.js';
 import { resetEffect } from './effect.js';
 import { showAlert } from './util.js';
-import {sendData} from './api.js';
+import { sendData } from './api.js';
 
 const form = document.querySelector('.img-upload__form');
 const modal = document.querySelector('.img-upload__overlay');
@@ -65,7 +65,6 @@ const setUserFormSubmit = (onSuccess) => {
       );
     }
   });
-  form.submit();
 };
 
 setUserFormSubmit(hideModal);
