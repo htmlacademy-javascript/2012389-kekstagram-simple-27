@@ -1,5 +1,7 @@
 import { resetScale } from './scale.js';
 import { resetEffect } from './effect.js';
+import { showAlert } from './util.js';
+import {sendData} from './api.js';
 
 const form = document.querySelector('.img-upload__form');
 const modal = document.querySelector('.img-upload__overlay');
@@ -49,14 +51,24 @@ const onFileInputChange = () => {
   showModal();
 };
 
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  if(pristine.validate()){
-    form.submit();
-  }
-});
+    const isValid = pristine.validate();
+
+    if(isValid) {
+      sendData(
+        () => onSuccess(),
+        () => showAlert(),
+        new FormData(evt.target),
+      );
+    }
+  });
+  form.submit();
+};
+
+setUserFormSubmit(hideModal);
 
 uploadFile.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
-
