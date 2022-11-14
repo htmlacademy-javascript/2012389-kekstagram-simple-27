@@ -65,13 +65,13 @@ const successAlert = () => {
   successContainer.append(success);
   document.body.append(successContainer);
 
-  const successButton = document.querySelector('.success__button');
+  // const successButton = document.querySelector('.success__button');
 
-  const hideSuccess = () => {
-    successContainer.remove();
-  };
+  // const hideSuccess = () => {
+  //   successContainer.remove();
+  // };
 
-  successButton.addEventListener('click', (hideSuccess));
+  // successButton.addEventListener('click', (hideSuccess));
 };
 
 //Экспорт
