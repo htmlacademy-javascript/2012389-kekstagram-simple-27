@@ -31,7 +31,6 @@ const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements
 
 
 //Сообщение об ошибке отправки фото
-const ALERT_SHOW_TIME = 5000;
 
 const errorTemplate = document
   .querySelector('#error')
@@ -50,10 +49,7 @@ const showAlert = () => {
     errorContainer.remove();
   };
 
-  errorButton.addEventListener('click', hideError);
-  // setTimeout(() => {
-  //   errorContainer.remove();
-  // }, ALERT_SHOW_TIME);
+  errorButton.addEventListener('click', (hideError));
 };
 
 
@@ -69,9 +65,13 @@ const successAlert = () => {
   successContainer.append(success);
   document.body.append(successContainer);
 
-  setTimeout(() => {
+  const successButton = document.querySelector('.success__button');
+
+  const hideSuccess = () => {
     successContainer.remove();
-  }, ALERT_SHOW_TIME);
+  };
+
+  successButton.addEventListener('click', (hideSuccess));
 };
 
 //Экспорт
