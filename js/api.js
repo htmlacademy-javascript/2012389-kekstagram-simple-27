@@ -5,7 +5,7 @@ import { showAlert } from './util.js';
 
 // Получение изображений из сервера
 
-const getData = (onSuccess) => {
+const getData = () => {
   fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
     .then((response) => response.json())
     .then((pictures) => {
@@ -18,7 +18,7 @@ const getData = (onSuccess) => {
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://27.javascript.pages.academy/kekstagram-simple',
+    'https://27.javascript.pages.academy/kekstagram-simpl',
     {
       method: 'POST',
       body,
@@ -26,13 +26,13 @@ const sendData = (onSuccess, onFail, body) => {
   )
     .then((response) => {
       if (response.ok) {
-        onSuccess(successAlert);
+        onSuccess(successAlert());
       } else {
-        onFail(showAlert);
+        onFail(showAlert());
       }
     })
     .catch(() => {
-      onFail(showAlert);
+      onFail(showAlert());
     });
 };
 

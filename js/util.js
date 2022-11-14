@@ -38,16 +38,24 @@ const errorTemplate = document
   .content.querySelector('.error');
 const errorContainer = document.createElement('div');
 
-const showAlert = (message) => {
+const showAlert = () => {
   const error = errorTemplate.cloneNode(true);
-  error.querySelector('.error__title').textContent = message;
 
+  errorContainer.append(error);
   document.body.append(errorContainer);
 
-  setTimeout(() => {
+  const errorButton = document.querySelector('.error__button');
+
+  const hideError = () => {
     errorContainer.remove();
-  }, ALERT_SHOW_TIME);
+  };
+
+  errorButton.addEventListener('click', hideError);
+  // setTimeout(() => {
+  //   errorContainer.remove();
+  // }, ALERT_SHOW_TIME);
 };
+
 
 //Соощение о успешной отправке фото
 const successTemplate = document
@@ -55,10 +63,10 @@ const successTemplate = document
   .content.querySelector('.success');
 const successContainer = document.createElement('div');
 
-const successAlert = (message) => {
+const successAlert = () => {
   const success = successTemplate.cloneNode(true);
-  success.querySelector('.success__title').textContent = message;
 
+  successContainer.append(success);
   document.body.append(successContainer);
 
   setTimeout(() => {
