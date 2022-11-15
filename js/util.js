@@ -1,5 +1,6 @@
 import { hideModal } from './form.js';
 
+
 //Функция, возвращающая случайное целое число из переданного диапазона включительно
 // Источник https://schoolsw3.com/js/js_random.php
 
@@ -49,9 +50,23 @@ const showAlert = () => {
 
   const hideError = () => {
     errorContainer.remove();
+    document.addEventListener('keydown', onEscHideError);
   };
 
+  function onEscHideError(evt) {
+    if (evt.key === 'Escape') {
+      evt.preventDefault();
+      hideError ();
+    }
+  }
+
   errorButton.addEventListener('click', (hideError));
+
+  document.body.addEventListener('click', (evt)=> {
+    if ( !evt.target.closest('error')) {
+      hideError();
+    }
+  });
 };
 
 
@@ -83,6 +98,12 @@ const successAlert = () => {
   }
 
   successButton.addEventListener('click', hideSuccess);
+
+  document.body.addEventListener('click', (evt)=> {
+    if ( !evt.target.closest('success')) {
+      hideSuccess();
+    }
+  });
 };
 
 
