@@ -12,7 +12,7 @@ const getData = () => {
       renderPictures(pictures);
     });
 };
-
+getData();
 
 //Отправка изображения
 
