@@ -1,6 +1,7 @@
 import { resetScale } from './scale.js';
 import { resetEffect } from './effect.js';
 import { showAlert } from './util.js';
+import { successAlert } from './util.js';
 import { sendData } from './api.js';
 
 const form = document.querySelector('.img-upload__form');
@@ -59,7 +60,7 @@ const setUserFormSubmit = (onSuccess) => {
 
     if(isValid) {
       sendData(
-        () => onSuccess(),
+        () => onSuccess(successAlert()),
         () => showAlert(),
         new FormData(evt.target),
       );
