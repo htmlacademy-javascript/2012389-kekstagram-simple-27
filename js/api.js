@@ -1,6 +1,6 @@
 import { renderPictures } from './picture.js';
 import { successAlert } from './util.js';
-import { showAlert } from './util.js';
+import { errorAlert } from './util.js';
 
 
 // Получение изображений из сервера
@@ -28,11 +28,11 @@ const sendData = (onSuccess, onFail, body) => {
       if (response.ok) {
         onSuccess(successAlert);
       } else {
-        onFail(showAlert);
+        onFail(errorAlert);
       }
     })
     .catch(() => {
-      onFail(showAlert);
+      onFail(errorAlert);
     });
 };
 

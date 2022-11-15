@@ -40,7 +40,7 @@ const errorTemplate = document
   .content.querySelector('.error');
 const errorContainer = document.createElement('div');
 
-const showAlert = () => {
+const errorAlert = () => {
   const error = errorTemplate.cloneNode(true);
 
   errorContainer.append(error);
@@ -60,13 +60,15 @@ const showAlert = () => {
     }
   }
 
-  errorButton.addEventListener('click', (hideError));
+  errorButton.addEventListener('click', hideError);
 
-  document.body.addEventListener('click', (evt)=> {
+  const onBackdropClickError = (evt)=> {
     if ( !evt.target.closest('error')) {
       hideError();
     }
-  });
+  };
+
+  document.body.addEventListener('click', onBackdropClickError);
 };
 
 
@@ -99,11 +101,14 @@ const successAlert = () => {
 
   successButton.addEventListener('click', hideSuccess);
 
-  document.body.addEventListener('click', (evt)=> {
+  const onBackdropClickSuccess = (evt)=> {
     if ( !evt.target.closest('success')) {
       hideSuccess();
     }
-  });
+  };
+
+  document.body.addEventListener('click', onBackdropClickSuccess);
+
 };
 
 
@@ -111,5 +116,5 @@ const successAlert = () => {
 
 export {getRandomNumber};
 export {getRandomArrayElement};
-export {showAlert};
+export {errorAlert};
 export {successAlert};

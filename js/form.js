@@ -1,6 +1,6 @@
 import { resetScale } from './scale.js';
 import { resetEffect } from './effect.js';
-import { showAlert } from './util.js';
+import { errorAlert } from './util.js';
 import { successAlert } from './util.js';
 import { sendData } from './api.js';
 
@@ -61,7 +61,7 @@ const setUserFormSubmit = (onSuccess) => {
     if(isValid) {
       sendData(
         () => onSuccess(),
-        () => showAlert(),
+        () => errorAlert(),
         new FormData(evt.target),
       );
     }
