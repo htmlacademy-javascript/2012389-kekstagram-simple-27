@@ -60,7 +60,7 @@ const setUserFormSubmit = (onSuccess) => {
 
     if(isValid) {
       sendData(
-        () => onSuccess(successAlert()),
+        () => onSuccess(),
         () => showAlert(),
         new FormData(evt.target),
       );
@@ -68,7 +68,7 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-setUserFormSubmit(hideModal);
+setUserFormSubmit(() => successAlert());
 
 uploadFile.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);

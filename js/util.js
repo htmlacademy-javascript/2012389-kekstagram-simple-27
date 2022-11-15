@@ -72,10 +72,19 @@ const successAlert = () => {
   const hideSuccess = () => {
     successContainer.remove();
     hideModal();
+    document.addEventListener('keydown', onEscHideSuccess);
   };
 
-  successButton.addEventListener('click', (hideSuccess));
+  function onEscHideSuccess(evt) {
+    if (evt.key === 'Escape') {
+      evt.preventDefault();
+      hideSuccess ();
+    }
+  }
+
+  successButton.addEventListener('click', hideSuccess);
 };
+
 
 //Экспорт
 
