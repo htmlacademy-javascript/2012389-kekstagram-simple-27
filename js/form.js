@@ -71,3 +71,5 @@ setUserFormSubmit(hideModal);
 
 uploadFile.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
+
+export { hideModal };

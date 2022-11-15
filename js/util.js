@@ -1,3 +1,5 @@
+import { hideModal } from './form.js';
+
 //Функция, возвращающая случайное целое число из переданного диапазона включительно
 // Источник https://schoolsw3.com/js/js_random.php
 
@@ -65,13 +67,14 @@ const successAlert = () => {
   successContainer.append(success);
   document.body.append(successContainer);
 
-  // const successButton = document.querySelector('.success__button');
+  const successButton = document.querySelector('.success__button');
 
-  // const hideSuccess = () => {
-  //   successContainer.remove();
-  // };
+  const hideSuccess = () => {
+    successContainer.remove();
+    hideModal();
+  };
 
-  // successButton.addEventListener('click', (hideSuccess));
+  successButton.addEventListener('click', (hideSuccess));
 };
 
 //Экспорт
