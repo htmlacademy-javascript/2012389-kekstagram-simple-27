@@ -50,7 +50,6 @@ const errorAlert = () => {
 
   const hideError = () => {
     errorContainer.remove();
-    document.addEventListener('keydown', onEscHideError);
   };
 
   function onEscHideError(evt) {
@@ -60,15 +59,15 @@ const errorAlert = () => {
     }
   }
 
-  errorButton.addEventListener('click', hideError);
-
   const onBackdropClickError = (evt)=> {
     if ( !evt.target.closest('error')) {
       hideError();
     }
   };
 
-  document.body.addEventListener('click', onBackdropClickError);
+  errorButton.addEventListener('click', hideError, { once: true });
+  document.addEventListener('keydown', onEscHideError, { once: true });
+  document.body.addEventListener('click', onBackdropClickError,{ once: true });
 };
 
 
@@ -89,7 +88,6 @@ const successAlert = () => {
   const hideSuccess = () => {
     successContainer.remove();
     hideModal();
-    document.addEventListener('keydown', onEscHideSuccess);
   };
 
   function onEscHideSuccess(evt) {
@@ -99,23 +97,16 @@ const successAlert = () => {
     }
   }
 
-  successButton.addEventListener('click', hideSuccess);
-
   const onBackdropClickSuccess = (evt)=> {
     if ( !evt.target.closest('success')) {
       hideSuccess();
     }
   };
 
-  document.body.addEventListener('click', onBackdropClickSuccess);
+  successButton.addEventListener('click', hideSuccess, { once: true });
+  document.addEventListener('keydown', onEscHideSuccess, { once: true });
+  document.body.addEventListener('click', onBackdropClickSuccess, { once: true });
 
-  setTimeout(() => {
-    if (hideSuccess) {
-      document.removeEventListener('keydown', onEscHideSuccess);
-      successButton.removeEventListener('click', hideSuccess);
-      document.body.removeEventListener('click', onBackdropClickSuccess);
-    }
-  }, 2000);
 };
 
 

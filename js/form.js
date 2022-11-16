@@ -20,8 +20,8 @@ const pristine = new Pristine(form, {
 
 const showModal = () => {
   modal.classList.remove('hidden');
+  document.body.addEventListener('keydown', onEscKeyDown);
   body.classList.add('modal-open');
-  document.addEventListener('keydown', onEscKeyDown);
 };
 
 const hideModal = () => {
@@ -30,8 +30,8 @@ const hideModal = () => {
   resetEffect();
   pristine.reset();
   modal.classList.add('hidden');
+  document.body.removeEventListener('keydown', onEscKeyDown);
   body.classList.remove('modal-open');
-  document.addEventListener('keydown', onEscKeyDown);
 };
 
 const isTextFieldFocused = () =>
@@ -69,6 +69,7 @@ const setUserFormSubmit = (onSuccess) => {
 };
 
 setUserFormSubmit(() => successAlert());
+
 
 uploadFile.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
