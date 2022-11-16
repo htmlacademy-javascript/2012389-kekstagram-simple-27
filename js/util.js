@@ -109,6 +109,13 @@ const successAlert = () => {
 
   document.body.addEventListener('click', onBackdropClickSuccess);
 
+  setTimeout(() => {
+    if (hideSuccess) {
+      document.removeEventListener('keydown', onEscHideSuccess);
+      successButton.removeEventListener('click', hideSuccess);
+      document.body.removeEventListener('click', onBackdropClickSuccess);
+    }
+  }, 2000);
 };
 
 
