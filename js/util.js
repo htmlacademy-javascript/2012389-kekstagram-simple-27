@@ -1,5 +1,6 @@
 import { hideModal } from './form.js';
-
+import { minusButton, plusButton, onMinusButtonClick, onPlusButtonClick } from './scale.js';
+import { form, onFormChange } from './effect.js';
 
 //Функция, возвращающая случайное целое число из переданного диапазона включительно
 // Источник https://schoolsw3.com/js/js_random.php
@@ -109,6 +110,13 @@ const successAlert = () => {
 
 };
 
+// Удаление обработчиков событий
+
+const removeEventListeners = () => {
+  minusButton.removeEventListener('click', onMinusButtonClick);
+  plusButton.removeEventListener('click', onPlusButtonClick);
+  form.removeEventListener('change', onFormChange);
+};
 
 //Экспорт
 
@@ -116,3 +124,4 @@ export {getRandomNumber};
 export {getRandomArrayElement};
 export {errorAlert};
 export {successAlert};
+export {removeEventListeners};

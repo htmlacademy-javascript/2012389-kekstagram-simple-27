@@ -3,6 +3,7 @@ import { resetEffect } from './effect.js';
 import { errorAlert } from './util.js';
 import { successAlert } from './util.js';
 import { sendData } from './api.js';
+import { removeEventListeners } from './util.js';
 
 const form = document.querySelector('.img-upload__form');
 const modal = document.querySelector('.img-upload__overlay');
@@ -32,6 +33,7 @@ const hideModal = () => {
   modal.classList.add('hidden');
   document.body.removeEventListener('keydown', onEscKeyDown);
   body.classList.remove('modal-open');
+  removeEventListeners();
 };
 
 const isTextFieldFocused = () =>

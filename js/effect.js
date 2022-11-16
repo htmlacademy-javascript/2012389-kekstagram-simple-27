@@ -125,4 +125,4 @@ updateSlider();
 form.addEventListener('change', onFormChange);
 sliderElement.noUiSlider.on('update', onSliderUpdate);
 
-export { resetEffect };
+export { resetEffect, form, onFormChange};
