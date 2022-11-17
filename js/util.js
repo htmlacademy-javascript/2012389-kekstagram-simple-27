@@ -43,7 +43,7 @@ const errorAlert = () => {
   }
 
   document.addEventListener('keydown', onEscHideError, { once: true });
-  document.body.addEventListener('click', onBackdropClick);
+  document.body.addEventListener('click', onBackdropClick, { once: true });
 };
 
 
@@ -75,7 +75,7 @@ const successAlert = () => {
   }
 
   document.addEventListener('keydown', onEscHideSuccess, { once: true });
-  document.body.addEventListener('click', onBackdropClick);
+  document.body.addEventListener('click', onBackdropClick, { once: true });
 };
 
 // Удаление обработчиков событий
