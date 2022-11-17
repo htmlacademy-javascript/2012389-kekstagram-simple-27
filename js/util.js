@@ -24,7 +24,7 @@ const errorTemplate = document
 const errorContainer = document.createElement('div');
 errorContainer.classList.add('popup');
 
-const errorAlert = () => {
+const showErrorAlert = () => {
   const error = errorTemplate.cloneNode(true);
 
   errorContainer.append(error);
@@ -35,12 +35,12 @@ const errorAlert = () => {
     errorContainer.remove();
   };
 
-  function onEscHideError(evt) {
+  const onEscHideError = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
       hideError ();
     }
-  }
+  };
 
   document.addEventListener('keydown', onEscHideError, { once: true });
   document.body.addEventListener('click', onBackdropClick, { once: true });
@@ -55,7 +55,7 @@ const successTemplate = document
 const successContainer = document.createElement('div');
 successContainer.classList.add('popup');
 
-const successAlert = () => {
+const showSuccessAlert = () => {
   const success = successTemplate.cloneNode(true);
 
   successContainer.append(success);
@@ -67,12 +67,12 @@ const successAlert = () => {
     hideModal();
   };
 
-  function onEscHideSuccess(evt) {
+  const onEscHideSuccess = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
       hideSuccess ();
     }
-  }
+  };
 
   document.addEventListener('keydown', onEscHideSuccess, { once: true });
   document.body.addEventListener('click', onBackdropClick, { once: true });
@@ -89,6 +89,6 @@ const removeEventListeners = () => {
 //Экспорт
 
 
-export {errorAlert};
-export {successAlert};
+export {showErrorAlert};
+export {showSuccessAlert};
 export {removeEventListeners};

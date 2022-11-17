@@ -1,7 +1,7 @@
 import { resetScale } from './scale.js';
 import { resetEffect } from './effect.js';
-import { errorAlert } from './util.js';
-import { successAlert } from './util.js';
+import { showErrorAlert } from './util.js';
+import { showSuccessAlert } from './util.js';
 import { sendData } from './api.js';
 import { removeEventListeners } from './util.js';
 
@@ -63,14 +63,14 @@ const setUserFormSubmit = (onSuccess) => {
     if(isValid) {
       sendData(
         () => onSuccess(),
-        () => errorAlert(),
+        () => showErrorAlert(),
         new FormData(evt.target),
       );
     }
   });
 };
 
-setUserFormSubmit(() => successAlert());
+setUserFormSubmit(() => showSuccessAlert());
 
 
 uploadFile.addEventListener('change', onFileInputChange);
