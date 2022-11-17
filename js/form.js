@@ -1,7 +1,9 @@
 import { resetScale } from './scale.js';
 import { resetEffect } from './effect.js';
-import { showAlert } from './util.js';
-import {sendData} from './api.js';
+import { errorAlert } from './util.js';
+import { successAlert } from './util.js';
+import { sendData } from './api.js';
+import { removeEventListeners } from './util.js';
 
 const form = document.querySelector('.img-upload__form');
 const modal = document.querySelector('.img-upload__overlay');
@@ -19,8 +21,8 @@ const pristine = new Pristine(form, {
 
 const showModal = () => {
   modal.classList.remove('hidden');
+  document.body.addEventListener('keydown', onEscKeyDown);
   body.classList.add('modal-open');
-  document.addEventListener('keydown', onEscKeyDown);
 };
 
 const hideModal = () => {
@@ -29,8 +31,9 @@ const hideModal = () => {
   resetEffect();
   pristine.reset();
   modal.classList.add('hidden');
+  document.body.removeEventListener('keydown', onEscKeyDown);
   body.classList.remove('modal-open');
-  document.addEventListener('keydown', onEscKeyDown);
+  removeEventListeners();
 };
 
 const isTextFieldFocused = () =>
@@ -60,15 +63,17 @@ const setUserFormSubmit = (onSuccess) => {
     if(isValid) {
       sendData(
         () => onSuccess(),
-        () => showAlert(),
+        () => errorAlert(),
         new FormData(evt.target),
       );
     }
   });
-  form.submit();
 };
 
-setUserFormSubmit(hideModal);
+setUserFormSubmit(() => successAlert());
+
 
 uploadFile.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
+
+export { hideModal };

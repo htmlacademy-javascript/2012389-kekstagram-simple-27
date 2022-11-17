@@ -1,18 +1,18 @@
 import { renderPictures } from './picture.js';
 import { successAlert } from './util.js';
-import { showAlert } from './util.js';
+import { errorAlert } from './util.js';
 
 
 // Получение изображений из сервера
 
-const getData = (onSuccess) => {
+const getData = () => {
   fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
     .then((response) => response.json())
     .then((pictures) => {
       renderPictures(pictures);
     });
 };
-
+getData();
 
 //Отправка изображения
 
@@ -28,11 +28,11 @@ const sendData = (onSuccess, onFail, body) => {
       if (response.ok) {
         onSuccess(successAlert);
       } else {
-        onFail(showAlert);
+        onFail(errorAlert);
       }
     })
     .catch(() => {
-      onFail(showAlert);
+      onFail(errorAlert);
     });
 };
 
