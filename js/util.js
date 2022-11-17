@@ -2,26 +2,6 @@ import { hideModal } from './form.js';
 import { minusButton, plusButton, onMinusButtonClick, onPlusButtonClick } from './scale.js';
 import { form, onFormChange } from './effect.js';
 
-//Функция, возвращающая случайное целое число из переданного диапазона включительно
-// Источник https://schoolsw3.com/js/js_random.php
-
-function getRandomNumber(min, max) {
-  if (typeof min !== 'number' || typeof max !== 'number') {
-    return NaN;
-  }
-  if ( min < 0 || max < 0) {
-    return NaN;
-  }
-  if (min >= max) {
-    return NaN;
-  }
-  return Math.floor(Math.random() * (max - min + 1) ) + min;
-}
-
-//Функция для получения случайного элемента массива
-
-const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
-
 
 // Закрытие по клику на область вне модального окна
 
@@ -108,8 +88,7 @@ const removeEventListeners = () => {
 
 //Экспорт
 
-export {getRandomNumber};
-export {getRandomArrayElement};
+
 export {errorAlert};
 export {successAlert};
 export {removeEventListeners};
