@@ -18,28 +18,39 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
-getRandomNumber(20,140);
-
-
 //Функция для проверки максимальной длины строки
 
 function checkStringLength(string, maxLength) {
   return string.length <= maxLength;
 }
 
-checkStringLength('fvfv',140);
+// checkStringLength(1,140);
 
 //Функция для получения случайного элемента массива
 
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
 
+// Закрытие по клику на область вне модального окна
+
+const onBackdropClick = ({target})=> {
+  const isBtnClick = target.closest('.error__button') || target.closest('.success__button');
+  const popup = document.querySelector('.popup');
+  if (popup && (!target.closest('.error__inner') && !target.closest('.success__inner')
+  || isBtnClick)) {
+
+    popup.remove();
+  }
+};
+
 //Сообщение об ошибке отправки фото
 
 const errorTemplate = document
   .querySelector('#error')
   .content.querySelector('.error');
+
 const errorContainer = document.createElement('div');
+errorContainer.classList.add('popup');
 
 const errorAlert = () => {
   const error = errorTemplate.cloneNode(true);
@@ -47,7 +58,6 @@ const errorAlert = () => {
   errorContainer.append(error);
   document.body.append(errorContainer);
 
-  const errorButton = document.querySelector('.error__button');
 
   const hideError = () => {
     errorContainer.remove();
@@ -60,15 +70,8 @@ const errorAlert = () => {
     }
   }
 
-  const onBackdropClickError = (evt)=> {
-    if ( !evt.target.closest('error')) {
-      hideError();
-    }
-  };
-
-  errorButton.addEventListener('click', hideError, { once: true });
   document.addEventListener('keydown', onEscHideError, { once: true });
-  document.body.addEventListener('click', onBackdropClickError,{ once: true });
+  document.body.addEventListener('click', onBackdropClick);
 };
 
 
@@ -76,7 +79,9 @@ const errorAlert = () => {
 const successTemplate = document
   .querySelector('#success')
   .content.querySelector('.success');
+
 const successContainer = document.createElement('div');
+successContainer.classList.add('popup');
 
 const successAlert = () => {
   const success = successTemplate.cloneNode(true);
@@ -84,7 +89,6 @@ const successAlert = () => {
   successContainer.append(success);
   document.body.append(successContainer);
 
-  const successButton = document.querySelector('.success__button');
 
   const hideSuccess = () => {
     successContainer.remove();
@@ -98,16 +102,8 @@ const successAlert = () => {
     }
   }
 
-  const onBackdropClickSuccess = (evt)=> {
-    if ( !evt.target.closest('success')) {
-      hideSuccess();
-    }
-  };
-
-  successButton.addEventListener('click', hideSuccess, { once: true });
   document.addEventListener('keydown', onEscHideSuccess, { once: true });
-  document.body.addEventListener('click', onBackdropClickSuccess, { once: true });
-
+  document.body.addEventListener('click', onBackdropClick);
 };
 
 // Удаление обработчиков событий
