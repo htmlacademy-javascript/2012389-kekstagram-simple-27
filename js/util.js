@@ -78,6 +78,15 @@ const showSuccessAlert = () => {
   document.body.addEventListener('click', onBackdropClick, { once: true });
 };
 
+// Добавление ораотчиков событий
+
+const addEventListeners = () => {
+  minusButton.addEventListener('click', onMinusButtonClick);
+  plusButton.addEventListener('click', onPlusButtonClick);
+  form.addEventListener('change', onFormChange);
+};
+
+
 // Удаление обработчиков событий
 
 const removeEventListeners = () => {
@@ -92,3 +101,4 @@ const removeEventListeners = () => {
 export {showErrorAlert};
 export {showSuccessAlert};
 export {removeEventListeners};
+export {addEventListeners};

@@ -3,7 +3,7 @@ import { resetEffect } from './effect.js';
 import { showErrorAlert } from './util.js';
 import { showSuccessAlert } from './util.js';
 import { sendData } from './api.js';
-import { removeEventListeners } from './util.js';
+import { addEventListeners, removeEventListeners } from './util.js';
 
 const form = document.querySelector('.img-upload__form');
 const modal = document.querySelector('.img-upload__overlay');
@@ -23,6 +23,7 @@ const showModal = () => {
   modal.classList.remove('hidden');
   document.body.addEventListener('keydown', onEscKeyDown);
   body.classList.add('modal-open');
+  addEventListeners();
 };
 
 const hideModal = () => {
