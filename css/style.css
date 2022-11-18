@@ -1299,42 +1299,6 @@ main {
 }
 
 
-/**
-  * Экран загрузки изображения
-  */
-
-
-.img-upload__message--loading::before {
-  content: "";
-  position: absolute;
-  bottom: 40%;
-  left: 50%;
-
-  width: 300px;
-  height: 10px;
-
-  background-color: #8a7d2d;
-
-  -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-          transform: translateX(-50%);
-}
-
-.img-upload__message--loading::after {
-  content: "";
-  position: absolute;
-  bottom: 40%;
-  left: 50%;
-
-  width: 200px;
-  height: 10px;
-
-  background-color: #ffe753;
-
-  -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-          transform: translateX(-50%);
-}
 
 
 /* Адаптивности чуток
