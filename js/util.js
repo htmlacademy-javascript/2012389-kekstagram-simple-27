@@ -5,16 +5,17 @@ import { form, onFormChange } from './effect.js';
 
 // Закрытие по клику на область вне модального окна
 
-const onBackdropClick = ({target})=> {
+const closePopupHandler = ({target})=> {
   const popup = document.querySelector('.popup');
+  const isBackdropClick = !target.closest('.error__inner') && !target.closest('.success__inner');
   if(popup){
-    if (popup.classList.contains('success-container') &&
-      (!target.closest('.success__inner') || target.closest('.success__button'))){
+    if (popup.classList.contains('success-container') && (isBackdropClick || target.closest('.success__button'))){
       hideModal();
       popup.remove();
     }
-    else if ((!target.closest('.error__inner') && !target.closest('.success__inner')) || target.closest('.error__button')){
+    else if (isBackdropClick || target.closest('.error__button')){
       popup.remove();
+      document.body.removeEventListener('click', closePopupHandler);
     }
   }
 };
@@ -48,7 +49,7 @@ const showErrorAlert = () => {
   };
 
   document.addEventListener('keydown', onEscHideError, { once: true });
-  document.body.addEventListener('click', onBackdropClick, { once: true });
+  document.body.addEventListener('click', closePopupHandler);
 };
 
 
@@ -80,7 +81,7 @@ const showSuccessAlert = () => {
   };
 
   document.addEventListener('keydown', onEscHideSuccess, { once: true });
-  document.body.addEventListener('click', onBackdropClick, { once: true });
+  document.body.addEventListener('click', closePopupHandler);
 };
 
 // Добавление обработчиков событий
@@ -98,6 +99,7 @@ const removeEventListeners = () => {
   minusButton.removeEventListener('click', onMinusButtonClick);
   plusButton.removeEventListener('click', onPlusButtonClick);
   form.removeEventListener('change', onFormChange);
+  document.body.removeEventListener('click', closePopupHandler);
 };
 
 //Экспорт
