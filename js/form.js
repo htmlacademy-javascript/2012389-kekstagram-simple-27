@@ -1,7 +1,6 @@
 import { resetScale } from './scale.js';
 import { resetEffect } from './effect.js';
-import { showErrorAlert } from './util.js';
-import { showSuccessAlert } from './util.js';
+import { showErrorAlert, showSuccessAlert } from './util.js';
 import { sendData } from './api.js';
 import { addEventListeners, removeEventListeners } from './util.js';
 
@@ -41,7 +40,8 @@ const isTextFieldFocused = () =>
   document.activeElement === commentField;
 
 function onEscKeyDown(evt) {
-  if (evt.key === 'Escape' && !isTextFieldFocused()) {
+  const popup = document.querySelector('.popup');
+  if (evt.key === 'Escape' && !isTextFieldFocused() && !popup) {
     evt.preventDefault();
     hideModal();
   }

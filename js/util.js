@@ -6,12 +6,15 @@ import { form, onFormChange } from './effect.js';
 // Закрытие по клику на область вне модального окна
 
 const onBackdropClick = ({target})=> {
-  const isBtnClick = target.closest('.error__button') || target.closest('.success__button');
   const popup = document.querySelector('.popup');
-  if (popup && (!target.closest('.error__inner') && !target.closest('.success__inner')
-  || isBtnClick)) {
-
-    popup.remove();
+  if(popup){
+    if ((!target.closest('.error__inner') && !target.closest('.success__inner')) || target.closest('.error__button')){
+      popup.remove();
+    }
+    if(target.closest('.success__inner')) {
+      hideModal();
+      popup.remove();
+    }
   }
 };
 
@@ -38,7 +41,7 @@ const showErrorAlert = () => {
   const onEscHideError = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
-      hideError ();
+      hideError();
     }
   };
 
@@ -70,7 +73,7 @@ const showSuccessAlert = () => {
   const onEscHideSuccess = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
-      hideSuccess ();
+      hideSuccess();
     }
   };
 
@@ -78,7 +81,7 @@ const showSuccessAlert = () => {
   document.body.addEventListener('click', onBackdropClick, { once: true });
 };
 
-// Добавление ораотчиков событий
+// Добавление обработчиков событий
 
 const addEventListeners = () => {
   minusButton.addEventListener('click', onMinusButtonClick);
