@@ -8,11 +8,12 @@ import { form, onFormChange } from './effect.js';
 const onBackdropClick = ({target})=> {
   const popup = document.querySelector('.popup');
   if(popup){
-    if ((!target.closest('.error__inner') && !target.closest('.success__inner')) || target.closest('.error__button')){
+    if (popup.classList.contains('success-container') &&
+      (!target.closest('.success__inner') || target.closest('.success__button'))){
+      hideModal();
       popup.remove();
     }
-    if(target.closest('.success__inner')) {
-      hideModal();
+    else if ((!target.closest('.error__inner') && !target.closest('.success__inner')) || target.closest('.error__button')){
       popup.remove();
     }
   }
@@ -26,6 +27,7 @@ const errorTemplate = document
 
 const errorContainer = document.createElement('div');
 errorContainer.classList.add('popup');
+errorContainer.classList.add('error-сontainer');
 
 const showErrorAlert = () => {
   const error = errorTemplate.cloneNode(true);
@@ -57,7 +59,7 @@ const successTemplate = document
 
 const successContainer = document.createElement('div');
 successContainer.classList.add('popup');
-
+successContainer.classList.add('success-container');
 const showSuccessAlert = () => {
   const success = successTemplate.cloneNode(true);
 
