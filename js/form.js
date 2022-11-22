@@ -1,9 +1,8 @@
 import { resetScale } from './scale.js';
 import { resetEffect } from './effect.js';
-import { errorAlert } from './util.js';
-import { successAlert } from './util.js';
+import { showErrorAlert, showSuccessAlert } from './util.js';
 import { sendData } from './api.js';
-import { removeEventListeners } from './util.js';
+import { addEventListeners, removeEventListeners } from './util.js';
 
 const form = document.querySelector('.img-upload__form');
 const modal = document.querySelector('.img-upload__overlay');
@@ -23,6 +22,7 @@ const showModal = () => {
   modal.classList.remove('hidden');
   document.body.addEventListener('keydown', onEscKeyDown);
   body.classList.add('modal-open');
+  addEventListeners();
 };
 
 const hideModal = () => {
@@ -40,7 +40,8 @@ const isTextFieldFocused = () =>
   document.activeElement === commentField;
 
 function onEscKeyDown(evt) {
-  if (evt.key === 'Escape' && !isTextFieldFocused()) {
+  const popup = document.querySelector('.popup');
+  if (evt.key === 'Escape' && !isTextFieldFocused() && !popup) {
     evt.preventDefault();
     hideModal();
   }
@@ -63,14 +64,14 @@ const setUserFormSubmit = (onSuccess) => {
     if(isValid) {
       sendData(
         () => onSuccess(),
-        () => errorAlert(),
+        () => showErrorAlert(),
         new FormData(evt.target),
       );
     }
   });
 };
 
-setUserFormSubmit(() => successAlert());
+setUserFormSubmit(() => showSuccessAlert());
 
 
 uploadFile.addEventListener('change', onFileInputChange);

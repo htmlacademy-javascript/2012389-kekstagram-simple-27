@@ -5,13 +5,18 @@ import { form, onFormChange } from './effect.js';
 
 // Закрытие по клику на область вне модального окна
 
-const onBackdropClick = ({target})=> {
-  const isBtnClick = target.closest('.error__button') || target.closest('.success__button');
+const closePopupHandler = ({target})=> {
   const popup = document.querySelector('.popup');
-  if (popup && (!target.closest('.error__inner') && !target.closest('.success__inner')
-  || isBtnClick)) {
-
-    popup.remove();
+  const isBackdropClick = !target.closest('.error__inner') && !target.closest('.success__inner');
+  if(popup){
+    if (popup.classList.contains('success-container') && (isBackdropClick || target.closest('.success__button'))){
+      hideModal();
+      popup.remove();
+    }
+    else if (isBackdropClick || target.closest('.error__button')){
+      popup.remove();
+      document.body.removeEventListener('click', closePopupHandler);
+    }
   }
 };
 
@@ -23,8 +28,9 @@ const errorTemplate = document
 
 const errorContainer = document.createElement('div');
 errorContainer.classList.add('popup');
+errorContainer.classList.add('error-сontainer');
 
-const errorAlert = () => {
+const showErrorAlert = () => {
   const error = errorTemplate.cloneNode(true);
 
   errorContainer.append(error);
@@ -35,15 +41,15 @@ const errorAlert = () => {
     errorContainer.remove();
   };
 
-  function onEscHideError(evt) {
+  const onEscHideError = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
-      hideError ();
+      hideError();
     }
-  }
+  };
 
   document.addEventListener('keydown', onEscHideError, { once: true });
-  document.body.addEventListener('click', onBackdropClick, { once: true });
+  document.body.addEventListener('click', closePopupHandler);
 };
 
 
@@ -54,8 +60,8 @@ const successTemplate = document
 
 const successContainer = document.createElement('div');
 successContainer.classList.add('popup');
-
-const successAlert = () => {
+successContainer.classList.add('success-container');
+const showSuccessAlert = () => {
   const success = successTemplate.cloneNode(true);
 
   successContainer.append(success);
@@ -67,16 +73,25 @@ const successAlert = () => {
     hideModal();
   };
 
-  function onEscHideSuccess(evt) {
+  const onEscHideSuccess = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
-      hideSuccess ();
+      hideSuccess();
     }
-  }
+  };
 
   document.addEventListener('keydown', onEscHideSuccess, { once: true });
-  document.body.addEventListener('click', onBackdropClick, { once: true });
+  document.body.addEventListener('click', closePopupHandler);
 };
+
+// Добавление обработчиков событий
+
+const addEventListeners = () => {
+  minusButton.addEventListener('click', onMinusButtonClick);
+  plusButton.addEventListener('click', onPlusButtonClick);
+  form.addEventListener('change', onFormChange);
+};
+
 
 // Удаление обработчиков событий
 
@@ -84,11 +99,13 @@ const removeEventListeners = () => {
   minusButton.removeEventListener('click', onMinusButtonClick);
   plusButton.removeEventListener('click', onPlusButtonClick);
   form.removeEventListener('change', onFormChange);
+  document.body.removeEventListener('click', closePopupHandler);
 };
 
 //Экспорт
 
 
-export {errorAlert};
-export {successAlert};
+export {showErrorAlert};
+export {showSuccessAlert};
 export {removeEventListeners};
+export {addEventListeners};
